@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+const mobileRoutes = require('./routes/mobileRoutes');
+const compression = require('compression');
 
 // Load env vars
 dotenv.config();
@@ -19,7 +21,9 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
+app.use(compression());
 app.use('/api/auth', authRoutes);
+app.use('/api/m', mobileRoutes);
 
 // Root route
 app.get('/', (req, res) => {
